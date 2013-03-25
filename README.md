@@ -15,5 +15,14 @@ and triggers linkify.rb. The result will be put on the clipboard (and Keyboard M
 - I like [Markdown] and I cannot lie - similar to above
 - Marco's markup language{markdown} - searches for markdown, but does not include it in the link text
 
+## Todo
+- Add more data sources - blog posts based on nanoc directory
+- Make more configurable (right now wiki pages are global variables in dokuwiki.rb)
+- Make it easier to specify which wiki subfolders to look in (ie. not clip, ref etc)
+- Make it easier to prune files from selection list (ie localhost/)
+
+## Blue sky
+- Learn which links I use often (doesn't make much sense since the list of links is generated dynamically)
+
 ## License
 Released under Public domain.

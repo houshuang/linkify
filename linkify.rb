@@ -30,7 +30,10 @@ selection = pbpaste
 search, selection = extract_search(selection)
 
 # I'll eventually add other data sources here, like own blog posts etc
-choices = chrome_search(search, 10)
+dw_choices = dokuwiki_search(search)
+ch_choices = chrome_search(search, 10)
+choices = dw_choices + ch_choices
+
 fail "No hits for #{search}" if choices == []
 
 choice = choice_selector(choices)
