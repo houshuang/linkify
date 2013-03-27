@@ -3,8 +3,9 @@
 # writes text to clipboard, using a pipe to avoid shell mangling
 # rewritten using osascript for better UTF8 support (from http://www.coderaptors.com/?action=browse&diff=1&id=Random_tips_for_Mac_OS_X)
 def pbcopy(text)
-  `osascript -e 'set the clipboard to "#{text}"'`
-  #IO.popen("osascript -e 'set the clipboard to do shell script \"cat\"'","w+") {|pipe| pipe << text}
+  # work around, ' wrecks havoc on command line, but also caused some weird regexp substitution
+  File.open("/tmp/script.scpt", 'w') {|f| f << "set the clipboard to \"#{text}\""}
+  `osascript /tmp/script.scpt`
 end
 
 # gets text from clipboard

@@ -28,11 +28,11 @@ end
 
 selection = pbpaste
 search, selection = extract_search(selection)
-
-# I'll eventually add other data sources here, like own blog posts etc
+#beekeeper's son
+sc_choices = cache_search(search)
 dw_choices = dokuwiki_search(search)
 ch_choices = chrome_search(search, 10)
-choices = dw_choices + ch_choices
+choices = sc_choices + dw_choices + ch_choices
 
 fail "No hits for #{search}" if choices == []
 
