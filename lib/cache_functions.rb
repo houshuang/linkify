@@ -8,7 +8,7 @@ def youtube_list(user)
   offset = 1
   videos = []
   while true # keep requesting more videos until there are none left
-    resp = client.videos_by(:user => 'houshuang', :offset => offset)
+    resp = client.videos_by(:user => user, :offset => offset)
     break if resp.videos.size == 0
     offset += 25
     videos = videos + resp.videos.map {|v| ["http://http://www.youtube.com/watch?v=#{v.unique_id}", v.title]}
@@ -22,17 +22,32 @@ def vimeo_list(user)
   return videos.map {|v| ["http://vimeo.com/#{v["id"]}", v["title"]]}
 end
 
-def slideshare_list(username, apikey, shared_secret) #
+def slideshare_list(user, apikey, shared_secret) #
   require 'open-uri'
   require 'digest/sha1'
 
   ts = Time.now.to_i.to_s
   hash = Digest::SHA1.hexdigest(shared_secret + ts)
 
-  resp = open("https://www.slideshare.net/api/2/get_slideshows_by_user?username_for=#{username}&limit=100&api_key=#{apikey}&hash=#{hash}&ts=#{Time.now.to_i}").read
+  resp = open("https://www.slideshare.net/api/2/get_slideshows_by_user?username_for=#{user}&limit=100&api_key=#{apikey}&hash=#{hash}&ts=#{Time.now.to_i}").read
 
   slideary = []
   resp.scan(%r|<Title>(.+?)</Title>(.+?)<URL>(.+?)</URL>|m) {|match| slideary << [match[2], match[0]]}
 
   return slideary
+end
+
+def blog_list
+  searchword = "/content/*.html"
+
+  ary = []
+  search = Blogpath + "/content/*/*/*/*.html"
+  pages = Dir.glob(search, File::FNM_CASEFOLD)
+  pages.each do |p|
+    a = File.read(p)
+    title = a.scan(%r|^title: (.+?)$|)[0][0].gsub("\"", "")
+    url = Blogdomain + p[31..-6]
+    ary << [url, title]
+  end
+  return ary
 end

@@ -4,6 +4,8 @@ Wikipath = "/wiki/data/pages"
 Wikiurl = "http://reganmian.net/wiki"
 
 # searches Dokuwiki for pages matching search word
+# this function is a bit customized because I want to search certain namespaces etc,
+# but should be easy to customize
 def dokuwiki_search(search, limit=5)
   searchword = "/*" + search.gsub(" ", "_") + "*.txt"
 

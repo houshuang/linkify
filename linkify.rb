@@ -26,12 +26,26 @@ def extract_search(selection)
   return search, selection
 end
 
+def remove_unwanted(ary)
+  newary = []
+  ary.each do |a|
+    incl = true
+    Exclude_patterns.each do |excl|
+      incl = false if a[1].index(excl)
+    end
+    newary << a if incl
+  end
+  return newary
+end
+
 selection = pbpaste
 search, selection = extract_search(selection)
-#beekeeper's son
+
 sc_choices = cache_search(search)
 dw_choices = dokuwiki_search(search)
-ch_choices = chrome_search(search, 10)
+ch_choices_all = chrome_search(search, 10)
+ch_choices = remove_unwanted(ch_choices_all)
+
 choices = sc_choices + dw_choices + ch_choices
 
 fail "No hits for #{search}" if choices == []

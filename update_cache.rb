@@ -8,6 +8,7 @@ require 'library'
 require 'settings'
 
 urls = []
+urls = urls + blog_list
 Vimeo_accounts.each {|v| urls = urls + vimeo_list(v)}
 Youtube_accounts.each {|v| urls = urls + youtube_list(v)}
 Slideshare_accounts.each {|v| urls = urls + slideshare_list(v,
