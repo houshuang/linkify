@@ -4,7 +4,7 @@ Chrome history, and my wiki pages, and keeps a cache of blog posts, and YouTube,
 
 **[Blog post](http://reganmian.net/blog/2013/03/28/link-helper-for-markdown-using-google-chrome-history-and-other-sources/)**
 
-![Screencast](http://reganmian.net/files/linkify-screencast.png)(http://www.youtube.com/watch?v=cDVFjYx7dp4)
+[![Screencast](http://reganmian.net/files/linkify-screencast.png)](http://www.youtube.com/watch?v=cDVFjYx7dp4)
 
 ## Installation
 - Requires rb-appscript for checking which application is running, and which page is open in Chrome
