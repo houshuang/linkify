@@ -18,27 +18,27 @@ ActiveRecord::Base.establish_connection({
 # If you'd like to see the entire schema...
 # puts ActiveRecord::SchemaDumper.dump
 
-# module TimestampAccessors
-#   def timestamp_accessors(*attributes)
-#     attributes.each do |attr|
-#       name = attr.to_s
+module TimestampAccessors
+  def timestamp_accessors(*attributes)
+    attributes.each do |attr|
+      name = attr.to_s
 
-#       # Some timestamps have 17 digits
-#       # Since 10000000000 is year 2286, so I'm assuming that no dates are longer
-#       # than 10 digits
-#       define_method(name) {
-#         raw = read_attribute(name).to_s
-#         epoch = (raw.to_i / 1000000) -11644473600
-#         Time.at(epoch)
-#       }
+      # Some timestamps have 17 digits
+      # Since 10000000000 is year 2286, so I'm assuming that no dates are longer
+      # than 10 digits
+      define_method(name) {
+        raw = read_attribute(name).to_s
+        epoch = (raw.to_i / 1000000) -11644473600
+        Time.at(epoch)
+      }
 
-#       define_method(name+'=') { |t|
-#         write_attribute(name, t.to_i)
-#       }
-#     end
-#   end
-# end
-# ActiveRecord::Base.extend(TimestampAccessors)
+      define_method(name+'=') { |t|
+        write_attribute(name, t.to_i)
+      }
+    end
+  end
+end
+ActiveRecord::Base.extend(TimestampAccessors)
 
 # class Download < ActiveRecord::Base
 #   # t.string  "full_path",      :limit => nil, :null => false

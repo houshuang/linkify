@@ -3,7 +3,6 @@
 # shows notification on screen. one or two arguments, if one, just shows a message, if two, the first is the title
 # notice the path to growl
 def growl(title,text='',url='')
-  require 'Appscript'
   if text == ''
     text = title
     title = ''
@@ -11,7 +10,7 @@ def growl(title,text='',url='')
 
   #{Script_path}/growlnotify -t "#{title}" -m "#{text}"`
 
-  growlapp=Appscript.app('Growl')
+  growlapp = Appscript.app('Growl')
   growlapp.register({:as_application=>'Researchr', :all_notifications=>['Note'], :default_notifications=>['Note']})
   growlapp.notify({:with_name=>'Note',:title=>title,:description=>text,:application_name=>'Researchr', :callback_URL=>url})
 end
