@@ -14,7 +14,6 @@ def format_link(text, link, format = 'markdown')
     out.gsub!("!TEXT!", text)
     return out
   elsif format == 'wiki'
-    p link, Wikiserver
     link = link[Wikiserver.size..-1] if link.index(Wikiserver)
     return "[[#{link}|#{text}]]"
   end
@@ -65,10 +64,11 @@ search, selection = extract_search(selection)
 
 sc_choices = cache_search(search)
 dw_choices = dokuwiki_search(search)
-ch_choices_all = chrome_search(search, 10)
+ch_choices_all = chrome_search(search, 20)
 ch_choices = remove_unwanted(ch_choices_all)
+bg_choices = bing_search(search, 10)
 
-choices = sc_choices + dw_choices + ch_choices
+choices = sc_choices + dw_choices + ch_choices + bg_choices
 
 fail "No hits for #{search}" if choices == []
 
@@ -78,12 +78,14 @@ selection = choice[1] if selection.strip.size == 0 # replace with page title if 
 
 app = get_current_app
 
+format = 'markdown'
 format = 'markdown' if app == 'Sublime Text 2'
 if app == 'Google Chrome'
   url = cururl
   format = 'markdown'
   format = 'wiki' if url.index("localhost/wiki")
   format = 'rtf' if url.index("mail.google")
+  format = 'html' if url.index("reganmian.net/blog")
 end
 
 selection = choice[1] if selection.strip.size == 0 # replace with page title if link text empty

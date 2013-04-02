@@ -15,6 +15,9 @@ Blogdomain = 'http://reganmian.net/blog'
 # this script
 Path = '/Users/Stian/src/linkify'
 
+# get it here: http://www.bing.com/developers/
+Bing_authkey = ''
+
 # patterns to exclude from Chrome history
 Exclude_patterns = [
   'localhost',

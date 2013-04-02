@@ -2,6 +2,11 @@
 
 # presents a dropdown Pasha box with all the options
 
+# keep track of which content types are accessed most frequently
+def log_content_type(type)
+  File.open(Path + "/content.log", "a") {|f| f << type + "\n"}
+end
+
 def format_line(ary)
   return "#{abbrev(ary[0], 70)} || #{abbrev(ary[1], 70)}"
 end
@@ -28,5 +33,9 @@ def choice_selector(choice_ary)
   exit if pagetmp['cancel'] == 1 || pagetmp['cb'] == nil
 
   idx = pagetmp['cb'].split(":")[0].to_i
+
+  content_type = pagetmp['cb'].split(":")[1].strip
+  log_content_type(content_type)
+
   return choice_ary[idx]
 end

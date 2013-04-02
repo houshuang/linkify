@@ -18,5 +18,5 @@ def chrome_search(search, limit=5)
 
   # get most recent hits
   time_urls.sort! {|x, y| y[0] <=> x[0]}
-  return time_urls[0..limit-1].map {|x| [x[1], x[2]] }
+  return time_urls[0..limit-1].map {|x| [ "GC: #{x[1]}", x[2]] }
 end

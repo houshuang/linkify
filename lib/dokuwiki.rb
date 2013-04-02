@@ -18,7 +18,7 @@ def dokuwiki_search(search, limit=5)
     file = file[Wikipath.size + 1..-5]
     title = file.gsub("_", " ").split(/ /).each {|word| word.capitalize!}.join(" ")
     url = "#{Wikiurl}/#{file}"
-    ary << [title, url]
+    ary << ["DW: #{title}", url]
   end
   return ary
 end
