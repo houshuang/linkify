@@ -16,7 +16,7 @@ def youtube_list(user)
     resp = client.videos_by(:user => user, :offset => offset)
     break if resp.videos.size == 0
     offset += 25
-    videos = videos + resp.videos.map {|v| ["http://http://www.youtube.com/watch?v=#{v.unique_id}", "YT: #{v.title}"]}
+    videos = videos + resp.videos.map {|v| ["http://www.youtube.com/watch?v=#{v.unique_id}", "YT: #{v.title}"]}
   end
   return videos
 end
